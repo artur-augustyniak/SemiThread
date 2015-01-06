@@ -2,20 +2,10 @@
 
 namespace Aaugustyniak\Tests\UseCase\SemiThread;
 
-use \Mockery as m;
 use \PHPUnit_Framework_TestCase as TestCase;
 use Aaugustyniak\SemiThread\ConfinedEnvelope;
-
-class TmpPayload implements \Aaugustyniak\SemiThread\Cloneable {
-    
-    public $text = "sdf";
-
-    public function getSelfClone() {
-        return clone $this;
-    }
-
-//put your code here
-}
+use Aaugustyniak\SemiThread\Example\WriterThread;
+use Aaugustyniak\SemiThread\Example\TmpPayload;
 
 /**
  * Description of BaseUseCase
@@ -25,12 +15,11 @@ class TmpPayload implements \Aaugustyniak\SemiThread\Cloneable {
 class BaseUseCase extends TestCase {
 
     public function testMain() {
-        for ($i = 0; $i < 2; $i++) {
-            $payload = new TmpPayload();
-            $env = new ConfinedEnvelope($payload);
-            $thread = new WriterThread($env);
-            $thread->run();
-        }
+        $payload = new TmpPayload();
+        $env = new ConfinedEnvelope($payload);
+        $thread = new WriterThread($env);
+        $thread->setOutput('out');
+        $thread->start();
         echo "Main Process\n";
     }
 

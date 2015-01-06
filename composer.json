@@ -1,8 +1,8 @@
  {
     "name": "Aaugustyniak/SemiThread",
-    "description": "Nacho, nacho man. I want to be a nacho man",
+    "description": "Nohup interface simulating threaded env",
     "license": "MIT",
-    "keywords": ["nacho"],
+    "keywords": ["threads"],
     "authors": [
         {
             "name": "Artur Augustyniak",

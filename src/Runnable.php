@@ -8,28 +8,56 @@ namespace Aaugustyniak\SemiThread;
  */
 abstract class Runnable {
 
+    const FS_RUNNER_NAME = 'FsRunner.php';
+
     private $id;
     private $valid = true;
+
+    /**
+     * @todo windows black-hole?
+     */
+    private $output = '/dev/null';
+    private $serializationArea;
+    private $runnerPath;
     protected $payload;
 
-    function __construct(ConfinedEnvelope $envelope) {
-        $this->id = uniqid();
-        $this->payload = $envelope->popPayload();
+    public function setOutput($output) {
+        $this->output = $output;
     }
 
-    public abstract function work();
+    function setSerializationArea($serializationArea) {
+        $this->serializationArea = $serializationArea;
+    }
+
+    function __construct(ConfinedEnvelope $envelope) {
+        $this->serializationArea = \sys_get_temp_dir();
+        $this->runnerPath = realpath(__DIR__ .
+                DIRECTORY_SEPARATOR .
+                self::FS_RUNNER_NAME);
+        $this->id = uniqid();
+        $this->payload = $envelope->popPayloadOnce();
+    }
+
+    public abstract function run();
 
     /**
      * yup, thread run
      */
-    public function run() {
+    public function start() {
         if ($this->valid) {
             $this->valid = false;
-            $s = serialize($this);
-            file_put_contents("/tmp/" . $this->id, $s);
-            //$out = '/dev/null';
-            $out = 'out';
-            exec("nohup php NohupRunner.php " . $this->id . "  >> " . $out . " 2>&1 &");
+            $serializedThis = serialize($this);
+            file_put_contents(
+                    $this->serializationArea .
+                    DIRECTORY_SEPARATOR .
+                    $this->id, $serializedThis
+            );
+            $command = sprintf("nohup php %s %s %s >> %s 2>&1 &", 
+                    $this->runnerPath, 
+                    $this->id, 
+                    $this->serializationArea, 
+                    $this->output);
+            exec($command);
         } else {
             throw new PostMortemCall();
         }

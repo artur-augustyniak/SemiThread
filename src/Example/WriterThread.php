@@ -1,12 +1,9 @@
 <?php
 
-require_once './Runnable.php';
-require_once './TmpPayload.php';
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+namespace Aaugustyniak\SemiThread\Example;
+
+use Aaugustyniak\SemiThread\Runnable;
+use Aaugustyniak\SemiThread\ConfinedEnvelope;
 
 /**
  * Description of WriterThread
@@ -19,7 +16,7 @@ class WriterThread extends Runnable {
         parent::__construct($envelope);
     }
 
-    public function work() {
+    public function run() {
         sleep(1);
         echo "object TmpPayload " . $this->payload->text . "\n";
     }
