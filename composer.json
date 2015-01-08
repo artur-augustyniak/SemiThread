@@ -1,12 +1,16 @@
  {
-    "name": "Aaugustyniak/SemiThread",
+    "name": "aaugustyniak/semithread",
+    "type": "library",
     "description": "Nohup interface simulating threaded env",
     "license": "MIT",
     "keywords": ["thread", "nohup", "non-blocking", "async", "task", "job", "worker"],
+    "homepage": "https://github.com/artur-augustyniak/SemiThread",
     "authors": [
         {
             "name": "Artur Augustyniak",
-            "email": "artur@aaugustyniak.pl"
+            "email": "artur@aaugustyniak.pl",
+            "homepage": "https://github.com/artur-augustyniak",
+            "role": "Developer"
         }
     ],
     "require": {},
