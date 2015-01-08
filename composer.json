@@ -2,7 +2,7 @@
     "name": "Aaugustyniak/SemiThread",
     "description": "Nohup interface simulating threaded env",
     "license": "MIT",
-    "keywords": ["threads"],
+    "keywords": ["thread", "nohup", "non-blocking", "async", "task", "job", "worker"],
     "authors": [
         {
             "name": "Artur Augustyniak",

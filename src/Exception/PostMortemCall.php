@@ -21,26 +21,20 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Aaugustyniak\SemiThread;
+
+namespace Aaugustyniak\SemiThread\Exception;
 
 /**
- *
- * Script for unserializing and starting user jobs
+ * Mark for invalid SemiThread use
  *
  * @author Artur Augustyniak <artur@aaugustyniak.pl>
  */
+class PostMortemCall extends \Exception
+{
 
-$scriptPath = __DIR__;
-$autoloaderPath = '../vendor/autoload.php';
-$realAutoloaderPath = realpath($scriptPath . DIRECTORY_SEPARATOR . $autoloaderPath);
-require_once $realAutoloaderPath;
+    function __construct()
+    {
+        $this->message = "Illegal state. Trying to call start() 2nd time";
+    }
 
-$serializedId = $argv[1];
-$serializedFolderPath = $argv[2];
-$serializedPath = $serializedFolderPath . DIRECTORY_SEPARATOR . $serializedId;
-$serializedRunnable = \file_get_contents($serializedPath);
-$semiThread = \unserialize($serializedRunnable);
-unlink($serializedPath);
-$semiThread->run();
-unset($semiThread);
-exit(0);
+}

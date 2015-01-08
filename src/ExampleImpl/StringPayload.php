@@ -21,26 +21,43 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Aaugustyniak\SemiThread;
+
+namespace Aaugustyniak\SemiThread\ExampleImpl;
+
+use Aaugustyniak\SemiThread\Cloneable;
 
 /**
- *
- * Script for unserializing and starting user jobs
+ * Example implementation of Cloneable contract.
  *
  * @author Artur Augustyniak <artur@aaugustyniak.pl>
  */
+class StringPayload implements Cloneable
+{
+    /**
+     * @var string
+     */
+    private $text;
 
-$scriptPath = __DIR__;
-$autoloaderPath = '../vendor/autoload.php';
-$realAutoloaderPath = realpath($scriptPath . DIRECTORY_SEPARATOR . $autoloaderPath);
-require_once $realAutoloaderPath;
+    function __construct($text)
+    {
+        $this->text = $text;
+    }
 
-$serializedId = $argv[1];
-$serializedFolderPath = $argv[2];
-$serializedPath = $serializedFolderPath . DIRECTORY_SEPARATOR . $serializedId;
-$serializedRunnable = \file_get_contents($serializedPath);
-$semiThread = \unserialize($serializedRunnable);
-unlink($serializedPath);
-$semiThread->run();
-unset($semiThread);
-exit(0);
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSelfClone()
+    {
+        return clone $this;
+    }
+
+
+}

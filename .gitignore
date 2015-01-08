@@ -1,3 +1,7 @@
+.idea
+netbeans
 vendor
 composer.phar
-out
+semi_threads.out
+composer.lock
+
