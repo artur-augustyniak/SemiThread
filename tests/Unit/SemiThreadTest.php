@@ -24,13 +24,13 @@
 namespace Aaugustyniak\Tests\SemiThread;
 
 use \Mockery as m;
-use \PHPUnit_Framework_TestCase as TestCase;
+
 
 
 /**
  * @author Artur Augustyniak <artur@aaugustyniak.pl>
  */
-class SemiThreadTest extends TestCase
+class SemiThreadTest extends BaseTest
 {
 
     const SEMI_THREAD_CLASS = 'Aaugustyniak\SemiThread\SemiThread',

@@ -26,8 +26,8 @@ namespace Aaugustyniak\Tests\UseCase\SemiThread;
 
 use Aaugustyniak\SemiThread\ExampleImpl\StringPayload;
 use Aaugustyniak\SemiThread\ExampleImpl\WriterThread;
-use \PHPUnit_Framework_TestCase as TestCase;
 use Aaugustyniak\SemiThread\ConfinedEnvelope;
+use Aaugustyniak\Tests\SemiThread\BaseTest;
 
 
 /**
@@ -35,7 +35,7 @@ use Aaugustyniak\SemiThread\ConfinedEnvelope;
  *
  * @author Artur Augustyniak <artur@aaugustyniak.pl>
  */
-class BaseUseCase extends TestCase
+class BaseUseCase extends BaseTest
 {
 
     public function testMain()

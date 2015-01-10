@@ -87,10 +87,15 @@ abstract class SemiThread
         $this->setMode();
     }
 
-
+    /**
+     * Hook for dev mode and loader path in FsRunner.php
+     * nothing better for now
+     */
     private function setMode()
     {
-        $this->devMode = true;
+        if (defined("SEMI_THREAD_DEV_MODE")) {
+            $this->devMode = true;
+        }
     }
 
     /**
@@ -139,7 +144,7 @@ abstract class SemiThread
                 DIRECTORY_SEPARATOR .
                 $this->id, $serializedThis
             );
-            $command = sprintf("nohup php %s %s %s %s >> %s 2>&1 &", $this->runnerPath, $this->id, $this->serializationArea, (int) $this->devMode, $this->output);
+            $command = sprintf("nohup php %s %s %s %s >> %s 2>&1 &", $this->runnerPath, $this->id, $this->serializationArea, (int)$this->devMode, $this->output);
 
             exec($command);
         } else {

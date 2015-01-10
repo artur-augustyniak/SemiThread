@@ -25,13 +25,12 @@ namespace Aaugustyniak\Tests\SemiThread;
 
 use Aaugustyniak\SemiThread\Cloneable;
 use \Mockery as m;
-use \PHPUnit_Framework_TestCase as TestCase;
 use Aaugustyniak\SemiThread\ConfinedEnvelope;
 
 /**
  * @author Artur Augustyniak <artur@aaugustyniak.pl>
  */
-class ConfinedEnvelopeTest extends TestCase
+class ConfinedEnvelopeTest extends BaseTest
 {
 
     const CLONEABLE_IFACE = 'Aaugustyniak\SemiThread\Cloneable';
