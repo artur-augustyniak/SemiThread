@@ -25,18 +25,28 @@ namespace Aaugustyniak\SemiThread;
 
 /**
  *
- * Script for unserializing and starting user jobs
+ * Unserialize and run user job
  *
  * @author Artur Augustyniak <artur@aaugustyniak.pl>
  */
 
-$scriptPath = __DIR__;
-$autoloaderPath = '../vendor/autoload.php';
-$realAutoloaderPath = realpath($scriptPath . DIRECTORY_SEPARATOR . $autoloaderPath);
-require_once $realAutoloaderPath;
-
 $serializedId = $argv[1];
 $serializedFolderPath = $argv[2];
+$devMode = intval($argv[3]);
+
+
+$scriptPath = __DIR__;
+
+if ($devMode) {
+    $loaderPath = '../vendor/autoload.php';
+} else {
+    $loaderPath = '../../../autoload.php';
+}
+
+$realLoaderPath = realpath($scriptPath . DIRECTORY_SEPARATOR . $loaderPath);
+require_once $realLoaderPath;
+
+
 $serializedPath = $serializedFolderPath . DIRECTORY_SEPARATOR . $serializedId;
 $serializedRunnable = \file_get_contents($serializedPath);
 $semiThread = \unserialize($serializedRunnable);

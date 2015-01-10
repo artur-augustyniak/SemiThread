@@ -39,6 +39,11 @@ abstract class SemiThread
     const FS_RUNNER_NAME = 'FsRunner.php';
 
     /**
+     * @var bool
+     */
+    private $devMode = false;
+
+    /**
      * @var string file name for object transport
      */
     private $id;
@@ -79,6 +84,13 @@ abstract class SemiThread
             self::FS_RUNNER_NAME);
         $this->id = uniqid();
         $this->payload = $envelope->popPayloadOnce();
+        $this->setMode();
+    }
+
+
+    private function setMode()
+    {
+        $this->devMode = true;
     }
 
     /**
@@ -127,7 +139,8 @@ abstract class SemiThread
                 DIRECTORY_SEPARATOR .
                 $this->id, $serializedThis
             );
-            $command = sprintf("nohup php %s %s %s >> %s 2>&1 &", $this->runnerPath, $this->id, $this->serializationArea, $this->output);
+            $command = sprintf("nohup php %s %s %s %s >> %s 2>&1 &", $this->runnerPath, $this->id, $this->serializationArea, (int) $this->devMode, $this->output);
+
             exec($command);
         } else {
             throw new PostMortemCall();
