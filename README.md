@@ -38,7 +38,10 @@ examples are provided in Aaugustyniak\SemiThread\ExampleImpl.
 		$payload = new StringPayload("This is Payload");
         $envelope = new ConfinedEnvelope($payload);
         $thread = new WriterThread($envelope);
-        $thread->setOutput('semi_threads.out');
+        /**
+         * Optional, redirect jobs output to file 
+         */ 
+        $thread->setOutput('/some/path/semi_threads.out');
         $thread->start();
         echo "Main process output\n";
 		...
