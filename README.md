@@ -30,7 +30,7 @@ First of all You must provide your implementations of:
 * Aaugustyniak\SemiThread\SemiThread
 
 examples are provided in Aaugustyniak\SemiThread\ExampleImpl.
-
+```php
 		<?php 
 		
 		require_once "vendor/autoload.php";
