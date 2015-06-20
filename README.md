@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/artur-augustyniak/SemiThread.svg?branch=master)](https://travis-ci.org/artur-augustyniak/SemiThread)
 # Simple API for starting non blocking jobs.
 
 # SemiThread
